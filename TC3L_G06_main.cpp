@@ -15,3 +15,14 @@
 // Member_3:
 // Member_4:
 // *********************************************************
+
+#include <iostream>
+#include "function.h"
+using namespace std;
+
+int main()
+{
+
+    test1();
+    return 0;
+}
