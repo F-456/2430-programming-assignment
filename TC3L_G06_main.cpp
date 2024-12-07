@@ -17,12 +17,40 @@
 // *********************************************************
 
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
 #include "function.h"
+
 using namespace std;
 
 int main()
 {
+    ifstream file;
 
-    test1();
+    file.open("fileInput1.mdb.txt");
+    // open the input file
+
+    if (!file.is_open())
+    {
+        cerr << "The file cannot be opened ,please check the file name \n";
+        // return error if the file name is incorrect
+        return 1;
+    }
+    string command;
+    string id;
+
+    while (getline(file, command))
+    {
+
+        istringstream iss(command);
+        while (iss >> id)
+        {
+
+            cout << id << endl; // listing all the command in terminal
+        }
+    }
+
+    file.close();
     return 0;
 }
