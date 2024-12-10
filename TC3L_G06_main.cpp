@@ -40,14 +40,26 @@ int main()
     string command;
     string id;
 
-    while (getline(file, command))
+    while (getline(file, command, ';'))
+
     {
+        stringstream iss(command);
 
-        istringstream iss(command);
-        while (iss >> id)
+        cout << command << endl;
+
+        if (command.find("CREATE") != string::npos) // npo = no position no keyword is found in the string
+                                                    // to make checking the keyword possible
         {
+            if (command.find("TABLE") != string::npos)
+            {
 
-            cout << id << endl; // listing all the command in terminal
+                cout << "Creating Table now" << endl;
+            }
+            else
+            {
+
+                cout << "creating file now" << endl;
+            }
         }
     }
 
