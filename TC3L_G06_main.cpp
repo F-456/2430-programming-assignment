@@ -26,12 +26,13 @@ using namespace std;
 
 int main()
 {
-    ifstream file;
+    ifstream file_in;
+    ofstream file_out;
 
-    file.open("fileInput1.mdb.txt");
+    file_in.open("fileInput1.mdb.txt");
     // open the input file
 
-    if (!file.is_open())
+    if (!file_in.is_open())
     {
         cerr << "The file cannot be opened ,please check the file name \n";
         // return error if the file name is incorrect
@@ -39,8 +40,9 @@ int main()
     }
     string command;
     string id;
+    string file_name; // initialize file name
 
-    while (getline(file, command, ';'))
+    while (getline(file_in, command, ';')) // loop through command to find keyword
 
     {
         stringstream iss(command);
@@ -53,16 +55,18 @@ int main()
             if (command.find("TABLE") != string::npos)
             {
 
-                cout << "Creating Table now" << endl;
+                create_table(command);
             }
             else
             {
 
                 cout << "creating file now" << endl;
+                open_file(command); // passing command to process in the function
+                // creating file for output
             }
         }
     }
 
-    file.close();
+    file_in.close();
     return 0;
 }
