@@ -41,9 +41,9 @@ int main()
     string command;
     string id;
     string file_name; // initialize file name
+    string table_name;
 
     while (getline(file_in, command, ';')) // loop through command to find keyword
-
     {
         stringstream iss(command);
 
@@ -55,7 +55,7 @@ int main()
             if (command.find("TABLE") != string::npos)
             {
 
-                create_table(command);
+                table_name = create_table(command);
             }
             else
             {
@@ -64,6 +64,16 @@ int main()
                 open_file(command); // passing command to process in the function
                 // creating file for output
             }
+        }
+
+        else if (command.find("INSERT INTO") != string::npos) // inserting data
+        {
+
+            cout << " Inserting data " << endl;
+            insert_record(command, table_name); // passing command and table name to insert the data
+        }
+        else if (command.find("SELECT") != string::npos)
+        {
         }
     }
 
