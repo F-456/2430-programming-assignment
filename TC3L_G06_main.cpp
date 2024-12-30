@@ -5,7 +5,7 @@
 // Tutorial Class: TT5L
 // Trimester: 2430
 // Member_1: ID | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
-// Member_2: ID | NAME | EMAIL | PHONE
+// Member_2: 242UC244PP | Nicholas Beh Zhi Yang | NICHOLAS.BEH.ZHI@student.mmu.edu.my | 011-65215166
 // Member_3: ID | NAME | EMAIL | PHONE
 // Member_4: ID | NAME | EMAIL | PHONE
 // *********************************************************
@@ -34,11 +34,11 @@ int main()
     file_in.open("fileInput1.mdb");
 <<<<<<< Updated upstream
     file_out.open("fileOutput1.txt");
-=======
+    == == == =
 >>>>>>> Stashed changes
-    // open the input file
+                 // open the input file
 
-    if (!file_in.is_open())
+        if (!file_in.is_open())
     {
         cerr << "The file cannot be opened ,please check the file name \n";
         // return error if the file name is incorrect
@@ -48,6 +48,9 @@ int main()
     string id;
     string file_name; // initialize file name
     string table_name;
+
+    vector<string> headers = {"customer_id", "customer_name", "customer_city", "customer_state", "customer_country", "customer_phone", "customer_email"};
+    vector<vector<string>> records;
 
     vector<string> headers = {"customer_id", "customer_name", "customer_city", "customer_state", "customer_country", "customer_phone", "customer_email"};
     vector<vector<string>> records;
@@ -87,6 +90,6 @@ int main()
         }
     }
 
-        file_in.close();
+    file_in.close();
     return 0;
 }
