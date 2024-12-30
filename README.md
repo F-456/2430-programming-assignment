@@ -1,2 +1,2 @@
-# 2430 programming assgnment
+# 2430 programming assignment
  

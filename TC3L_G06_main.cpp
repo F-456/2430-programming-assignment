@@ -26,10 +26,13 @@ using namespace std;
 
 int main()
 {
+    variable Variables;
     ifstream file_in;
     ofstream file_out;
+    string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput1.mdb.txt");
+    file_in.open("fileInput1.mdb");
+    file_out.open("fileOutput1.txt");
     // open the input file
 
     if (!file_in.is_open())
@@ -43,11 +46,15 @@ int main()
     string file_name; // initialize file name
     string table_name;
 
+    vector<string> headers = {"customer_id", "customer_name", "customer_city", "customer_state", "customer_country", "customer_phone", "customer_email"};
+    vector<vector<string>> records;
+
     while (getline(file_in, command, ';')) // loop through command to find keyword
     {
         stringstream iss(command);
 
         cout << command << endl;
+        file_out << command << endl;
 
         if (command.find("CREATE") != string::npos) // npo = no position no keyword is found in the string
                                                     // to make checking the keyword possible
@@ -55,13 +62,12 @@ int main()
             if (command.find("TABLE") != string::npos)
             {
 
-                table_name = create_table(command);
+                table_name = Variables.create_table(command);
             }
             else
             {
 
-                cout << "creating file now" << endl;
-                open_file(command); // passing command to process in the function
+                Variables.open_file(command); // passing command to process in the function
                 // creating file for output
             }
         }
@@ -69,14 +75,15 @@ int main()
         else if (command.find("INSERT INTO") != string::npos) // inserting data
         {
 
-            cout << " Inserting data " << endl;
-            insert_record(command, table_name); // passing command and table name to insert the data
+            Variables.insert_record(command, table_name); // passing command and table name to insert the data
+            file_out << Variables.elements << endl;
         }
         else if (command.find("SELECT") != string::npos)
         {
+            Variables.select_record(command, table_name, headers, records);
         }
     }
 
-    file_in.close();
+        file_in.close();
     return 0;
 }
