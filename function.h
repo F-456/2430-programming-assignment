@@ -19,6 +19,17 @@ class variable
 {
 private:
     int size;
+    vector<string> v1; // 10 vector as column to store data
+    vector<string> v2;
+    vector<string> v3;
+    vector<string> v4;
+    vector<string> v5;
+    vector<string> v6;
+    vector<string> v7;
+    vector<string> v8;
+    vector<string> v9;
+    vector<string> v10;
+    vector<string> header_key;
 
 public:
     variable() : size(0) {}
@@ -76,9 +87,7 @@ public:
         string word;
         string table_name;
 
-        vector<string> header_key;
-
-        while (ss >> word) // loop through every word of the command itself
+                while (ss >> word) // loop through every word of the command itself
         {
 
             if (word.find('CREATE') != string::npos) // ignore and passes create
@@ -124,16 +133,6 @@ public:
 
     void insert_record(string s, string table_name)
     {
-        vector<string> v1; // 10 vector as column to store data
-        vector<string> v2;
-        vector<string> v3;
-        vector<string> v4;
-        vector<string> v5;
-        vector<string> v6;
-        vector<string> v7;
-        vector<string> v8;
-        vector<string> v9;
-        vector<string> v10;
 
         string word;
         stringstream ss(s);

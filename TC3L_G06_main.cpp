@@ -32,13 +32,10 @@ int main()
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
     file_in.open("fileInput1.mdb");
-<<<<<<< Updated upstream
     file_out.open("fileOutput1.txt");
-    == == == =
->>>>>>> Stashed changes
-                 // open the input file
+    // open the input file
 
-        if (!file_in.is_open())
+    if (!file_in.is_open())
     {
         cerr << "The file cannot be opened ,please check the file name \n";
         // return error if the file name is incorrect
@@ -48,9 +45,6 @@ int main()
     string id;
     string file_name; // initialize file name
     string table_name;
-
-    vector<string> headers = {"customer_id", "customer_name", "customer_city", "customer_state", "customer_country", "customer_phone", "customer_email"};
-    vector<vector<string>> records;
 
     vector<string> headers = {"customer_id", "customer_name", "customer_city", "customer_state", "customer_country", "customer_phone", "customer_email"};
     vector<vector<string>> records;
