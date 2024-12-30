@@ -32,7 +32,10 @@ int main()
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
     file_in.open("fileInput1.mdb");
+<<<<<<< Updated upstream
     file_out.open("fileOutput1.txt");
+=======
+>>>>>>> Stashed changes
     // open the input file
 
     if (!file_in.is_open())
