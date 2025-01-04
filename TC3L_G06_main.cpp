@@ -4,7 +4,7 @@
 // Lecture Class: TC3L
 // Tutorial Class: TT5L
 // Trimester: 2430
-// Member_1: ID | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
+// Member_1: 242UC244DD | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
 // Member_2: 242UC244PP | Nicholas Beh Zhi Yang | NICHOLAS.BEH.ZHI@student.mmu.edu.my | 011-65215166
 // Member_3: ID | NAME | EMAIL | PHONE
 // Member_4: ID | NAME | EMAIL | PHONE
@@ -32,7 +32,7 @@ int main()
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
     file_in.open("fileInput1.mdb");
-    file_out.open("fileOutput1.txt");
+    file_out.open("fileOutput1.txt", ios::out);
     // open the input file
 
     if (!file_in.is_open())
@@ -46,7 +46,6 @@ int main()
     string file_name; // initialize file name
     string table_name;
 
-    vector<string> headers = {"customer_id", "customer_name", "customer_city", "customer_state", "customer_country", "customer_phone", "customer_email"};
     vector<vector<string>> records;
 
     while (getline(file_in, command, ';')) // loop through command to find keyword
@@ -78,10 +77,19 @@ int main()
             Variables.insert_record(command, table_name); // passing command and table name to insert the data
             file_out << Variables.elements << endl;
         }
-        else if (command.find("SELECT") != string::npos)
+    }
+
+    file_in.clear();  // Clear any EOF or fail flags
+    file_in.seekg(0); // set the reading process to the start of the file
+
+    while (getline(file_in, command, ';')) // second get line
+                                           // to prevent segmentation error because of incomplete process
+    {
+        stringstream iss(command);
+
+        if (command.find("SELECT") != string::npos)
         {
-            Variables.select_record(command, table_name, headers, records);
-            cout << "Select all detected!" << endl;
+            Variables.select(command);
         }
     }
 
