@@ -81,6 +81,7 @@ int main()
         else if (command.find("SELECT") != string::npos)
         {
             Variables.select_record(command, table_name, headers, records);
+            cout << "Select all detected!" << endl;
         }
     }
 

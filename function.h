@@ -87,7 +87,7 @@ public:
         string word;
         string table_name;
 
-                while (ss >> word) // loop through every word of the command itself
+        while (ss >> word) // loop through every word of the command itself
         {
 
             if (word.find('CREATE') != string::npos) // ignore and passes create
@@ -142,15 +142,16 @@ public:
         {
             if (word.find('INSERT') != string::npos || word.find('INTO') != string::npos) // passes insert or into
             {
+                continue;
             }
 
             else if (word.find('VALUES') != string::npos) // passes values
-
             {
             }
 
             else if (word.find(table_name) != string::npos) // passes table name
             {
+                continue;
             }
             else
             {
@@ -222,27 +223,27 @@ public:
         }
     }
 
-    void select_record(const string &command, const string &table_name, const vector<string> &headers, const vector<vector<string>> &records)
+    void select_record(const string &command, const string &table_name, const vector<string> &headers, vector<vector<string>> &records) // changed to reference records by reference
     {
         string select_item, where_item;
         bool is_distinct = false;
 
-        if (command.find("*") != string::npos)
+        if (command.find("*") != string::npos) // if SELECT * is used
         {
             cout << "Results:" << endl;
 
-            for (const auto &header : headers)
+            for (const auto &header : headers) // Print headers
             {
                 cout << header << "\t";
             }
             cout << endl;
 
             // Print records
-            for (const auto &record : records)
+            for (const auto &record : records) // loop through records to print values
             {
                 for (const auto &value : record)
                 {
-                    cout << value << "\t";
+                    cout << value << "\t"; // Print the values
                 }
                 cout << endl;
             }
@@ -252,6 +253,7 @@ public:
             cout << "SELECT command not fully implemented." << endl;
         }
 
+        // If 'DISTINCT' is specified
         if (command.find("DISTINCT") != string::npos)
         {
             is_distinct = true;
@@ -261,22 +263,21 @@ public:
         if (where_pos != string::npos)
         {
             select_item = command.substr(0, where_pos);
-            where_item = command.substr(where_pos + 6); // skip "WHERE" (skip 6 characters including space)
+            where_item = command.substr(where_pos + 6); // Skip "WHERE"
         }
         else
         {
             select_item = command;
         }
 
-        // determine the columns to select
         vector<string> columns_to_select;
         size_t from_pos = select_item.find("FROM");
         if (from_pos != string::npos)
         {
-            string columns_part = select_item.substr(7, from_pos - 7); // start at 7, skip "SELECT" which is 7 char long
+            string columns_part = select_item.substr(7, from_pos - 7); // Extract column names
             stringstream ss(columns_part);
             string column;
-            while (getline(ss, column, ','))
+            while (getline(ss, column, ',')) // Split into column names
             {
                 columns_to_select.push_back(column);
             }
@@ -284,10 +285,10 @@ public:
 
         if (columns_to_select.size() == 1 && columns_to_select[0].find("*") != string::npos)
         {
-            columns_to_select = headers;
+            columns_to_select = headers; // if "*" is selected, use all headers
         }
 
-        // filter the record based on "WHERE"
+        // Filter records based on WHERE clause
         vector<vector<string>> filtered_records;
         for (const auto &record : records)
         {
@@ -302,7 +303,7 @@ public:
 
                 if (value.front() == '\'')
                 {
-                    value = value.substr(1, value.size() - 2);
+                    value = value.substr(1, value.size() - 2); // Remove surrounding quotes
                 }
 
                 auto col_it = find(headers.begin(), headers.end(), column);
@@ -325,14 +326,15 @@ public:
 
                 if (condition_met)
                 {
-                    filtered_records.push_back(record);
-                }
-                else
-                {
-                    filtered_records.push_back(record);
+                    filtered_records.push_back(record); // Add matching record
                 }
             }
+            else
+            {
+                filtered_records.push_back(record); // Add all records if no WHERE condition
+            }
         }
+
         set<vector<string>> distinct_records;
         if (is_distinct)
         {
@@ -350,11 +352,12 @@ public:
                     size_t col_index = distance(headers.begin(), col_it);
                     selected_values.push_back(record[col_index]);
                 }
-                distinct_records.insert(selected_values);
+                distinct_records.insert(selected_values); // Insert only distinct records
             }
         }
 
-        cout << "Results : " << endl;
+        // Print results (either filtered or distinct)
+        cout << "Results: " << endl;
         if (is_distinct)
         {
             for (const auto &record : distinct_records)
@@ -379,7 +382,7 @@ public:
                         return;
                     }
                     size_t col_index = distance(headers.begin(), col_it);
-                    cout << record[col_index] << "\t";
+                    cout << record[col_index] << "\t"; // Print filtered columns
                 }
                 cout << endl;
             }
