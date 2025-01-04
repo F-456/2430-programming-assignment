@@ -19,6 +19,7 @@ class variable
 {
 private:
     int size;
+    int record_number = 0;
     vector<string> v1; // 10 vector as column to store data
     vector<string> v2;
     vector<string> v3;
@@ -87,7 +88,7 @@ public:
         string word;
         string table_name;
 
-                while (ss >> word) // loop through every word of the command itself
+        while (ss >> word) // loop through every word of the command itself
         {
 
             if (word.find('CREATE') != string::npos) // ignore and passes create
@@ -156,8 +157,8 @@ public:
             {
                 // removing unwanted parenthesis in both side of the string
                 elements = word.substr(1, word.size() - 2);
-                cout << elements << endl;
-                file_out << elements << endl;
+                // cout << elements << endl;
+                // file_out << elements << endl;
 
                 vector<string> record;
                 string temp;
@@ -173,7 +174,7 @@ public:
                     record.push_back(temp);
                 }
 
-                int size = record.size(); // size of how many keys
+                size = record.size(); // size of how many keys
 
                 for (int i = 0; i < size; i++) // loop through all the data vector and insert the data into them
                 {
@@ -217,172 +218,95 @@ public:
                     {
                         v10.push_back(record[9]);
                     }
+                    record_number++;
                 }
             }
         }
     }
 
-    void select_record(const string &command, const string &table_name, const vector<string> &headers, const vector<vector<string>> &records)
+    void select(string s)
     {
-        string select_item, where_item;
-        bool is_distinct = false;
+        file_out.open("fileOutput1.txt", fstream::app); // writting in append mode to prevent overwritting file
 
-        if (command.find("*") != string::npos)
+        record_number = record_number / size; // deviding record number with size to get the precise number of
+        // how many record is inserted (important)
+        string word;
+        stringstream ss(s);
+
+        cout << "There are " << record_number << "record" << endl;
+        cout << "size are " << size << endl;
+        while (ss >> word)
         {
-            cout << "Results:" << endl;
-
-            for (const auto &header : headers)
+            if (word.find('*') != string::npos)
             {
-                cout << header << "\t";
-            }
-            cout << endl;
-
-            // Print records
-            for (const auto &record : records)
-            {
-                for (const auto &value : record)
+                for (int y = 0; y < size; y++)
                 {
-                    cout << value << "\t";
+                    cout << header_key[y] << ',';
+                    file_out << header_key[y] << ',';
                 }
                 cout << endl;
-            }
-        }
-        else
-        {
-            cout << "SELECT command not fully implemented." << endl;
-        }
+                file_out << endl;
 
-        if (command.find("DISTINCT") != string::npos)
-        {
-            is_distinct = true;
-        }
-
-        size_t where_pos = command.find("WHERE");
-        if (where_pos != string::npos)
-        {
-            select_item = command.substr(0, where_pos);
-            where_item = command.substr(where_pos + 6); // skip "WHERE" (skip 6 characters including space)
-        }
-        else
-        {
-            select_item = command;
-        }
-
-        // determine the columns to select
-        vector<string> columns_to_select;
-        size_t from_pos = select_item.find("FROM");
-        if (from_pos != string::npos)
-        {
-            string columns_part = select_item.substr(7, from_pos - 7); // start at 7, skip "SELECT" which is 7 char long
-            stringstream ss(columns_part);
-            string column;
-            while (getline(ss, column, ','))
-            {
-                columns_to_select.push_back(column);
-            }
-        }
-
-        if (columns_to_select.size() == 1 && columns_to_select[0].find("*") != string::npos)
-        {
-            columns_to_select = headers;
-        }
-
-        // filter the record based on "WHERE"
-        vector<vector<string>> filtered_records;
-        for (const auto &record : records)
-        {
-            if (!where_item.empty())
-            {
-                stringstream ss(where_item);
-                string column, condition, value;
-
-                getline(ss, column, ' ');
-                ss >> condition;
-                getline(ss, value);
-
-                if (value.front() == '\'')
+                for (int i = 0; i < record_number; i++) // nested loop to cout two dimensional vector at once
                 {
-                    value = value.substr(1, value.size() - 2);
-                }
-
-                auto col_it = find(headers.begin(), headers.end(), column);
-                if (col_it == headers.end())
-                {
-                    cerr << "Column " << column << " not found in headers." << endl;
-                    return;
-                }
-                size_t col_index = distance(headers.begin(), col_it);
-
-                bool condition_met = false;
-                if (condition == "=")
-                {
-                    condition_met = (record[col_index] == value);
-                }
-                else if (condition == "!=")
-                {
-                    condition_met = (record[col_index] != value);
-                }
-
-                if (condition_met)
-                {
-                    filtered_records.push_back(record);
-                }
-                else
-                {
-                    filtered_records.push_back(record);
-                }
-            }
-        }
-        set<vector<string>> distinct_records;
-        if (is_distinct)
-        {
-            for (const auto &record : filtered_records)
-            {
-                vector<string> selected_values;
-                for (const auto &column : columns_to_select)
-                {
-                    auto col_it = find(headers.begin(), headers.end(), column);
-                    if (col_it == headers.end())
+                    for (int x = 0; x < size; x++)
                     {
-                        cerr << "Column " << column << " not found in headers." << endl;
-                        return;
+                        if (x == 0) // cout the first column
+                        {
+                            cout << v1[i] << ",";
+                            file_out << v1[i] << ',';
+                        }
+                        else if (x == 1) // cout the second column
+                        {
+                            cout << v2[i] << ",";
+                            file_out << v2[i] << ',';
+                        }
+                        else if (x == 2)
+                        {
+                            cout << v3[i] << ",";
+                            file_out << v3[i] << ',';
+                        }
+                        else if (x == 3)
+                        {
+                            cout << v4[i] << ",";
+                            file_out << v4[i] << ',';
+                        }
+                        else if (x == 4)
+                        {
+                            cout << v5[i] << ",";
+                            file_out << v5[i] << ',';
+                        }
+                        else if (x == 5)
+                        {
+                            cout << v6[i] << ",";
+                            file_out << v6[i] << ',';
+                        }
+                        else if (x == 6)
+                        {
+                            cout << v7[i] << ",";
+                            file_out << v7[i] << ',';
+                        }
+                        else if (x == 7)
+                        {
+                            cout << v8[i] << ",";
+                            file_out << v8[i] << ',';
+                        }
+                        else if (x == 8)
+                        {
+                            cout << v9[i] << ",";
+                            file_out << v9[i] << ',';
+                        }
+                        else if (x == 9)
+                        {
+                            cout << v10[i] << ",";
+                            file_out << v10[i] << ',';
+                        }
                     }
-                    size_t col_index = distance(headers.begin(), col_it);
-                    selected_values.push_back(record[col_index]);
+                    cout << endl;
+                    file_out << endl;
                 }
-                distinct_records.insert(selected_values);
-            }
-        }
-
-        cout << "Results : " << endl;
-        if (is_distinct)
-        {
-            for (const auto &record : distinct_records)
-            {
-                for (const auto &value : record)
-                {
-                    cout << value << "\t";
-                }
-                cout << endl;
-            }
-        }
-        else
-        {
-            for (const auto &record : filtered_records)
-            {
-                for (const auto &column : columns_to_select)
-                {
-                    auto col_it = find(headers.begin(), headers.end(), column);
-                    if (col_it == headers.end())
-                    {
-                        cerr << "Column " << column << " not found in headers." << endl;
-                        return;
-                    }
-                    size_t col_index = distance(headers.begin(), col_it);
-                    cout << record[col_index] << "\t";
-                }
-                cout << endl;
             }
         }
     }
-};
+
+}; // don't delete this line
