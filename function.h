@@ -20,7 +20,6 @@ class variable
 private:
     int size;
     int record_number = 0;
-    int record_number = 0;
     vector<string> v1; // 10 vector as column to store data
     vector<string> v2;
     vector<string> v3;
@@ -160,8 +159,6 @@ public:
                 elements = word.substr(1, word.size() - 2);
                 // cout << elements << endl;
                 // file_out << elements << endl;
-                // cout << elements << endl;
-                // file_out << elements << endl;
 
                 vector<string> record;
                 string temp;
@@ -222,7 +219,6 @@ public:
                         v10.push_back(record[9]);
                     }
                     record_number++;
-                    record_number++;
                 }
             }
         }
@@ -247,89 +243,70 @@ public:
                 {
                     cout << header_key[y] << ',';
                     file_out << header_key[y] << ',';
-                    void select(string s)
+                }
+                cout << endl;
+                file_out << endl;
+
+                for (int i = 0; i < record_number; i++) // nested loop to cout two dimensional vector at once
+                {
+                    for (int x = 0; x < size; x++)
                     {
-                        file_out.open("fileOutput1.txt", fstream::app); // writting in append mode to prevent overwritting file
-
-                        record_number = record_number / size; // deviding record number with size to get the precise number of
-                        // how many record is inserted (important)
-                        string word;
-                        stringstream ss(s);
-
-                        cout << "There are " << record_number << "record" << endl;
-                        cout << "size are " << size << endl;
-                        while (ss >> word)
+                        if (x == 0) // cout the first column
                         {
-                            if (word.find('*') != string::npos)
-                            {
-                                for (int y = 0; y < size; y++)
-                                {
-                                    cout << header_key[y] << ',';
-                                    file_out << header_key[y] << ',';
-                                }
-                                cout << endl;
-                                file_out << endl;
-
-                                for (int i = 0; i < record_number; i++) // nested loop to cout two dimensional vector at once
-                                {
-                                    for (int x = 0; x < size; x++)
-                                    {
-                                        if (x == 0) // cout the first column
-                                        {
-                                            cout << v1[i] << ",";
-                                            file_out << v1[i] << ',';
-                                        }
-                                        else if (x == 1) // cout the second column
-                                        {
-                                            cout << v2[i] << ",";
-                                            file_out << v2[i] << ',';
-                                        }
-                                        else if (x == 2)
-                                        {
-                                            cout << v3[i] << ",";
-                                            file_out << v3[i] << ',';
-                                        }
-                                        else if (x == 3)
-                                        {
-                                            cout << v4[i] << ",";
-                                            file_out << v4[i] << ',';
-                                        }
-                                        else if (x == 4)
-                                        {
-                                            cout << v5[i] << ",";
-                                            file_out << v5[i] << ',';
-                                        }
-                                        else if (x == 5)
-                                        {
-                                            cout << v6[i] << ",";
-                                            file_out << v6[i] << ',';
-                                        }
-                                        else if (x == 6)
-                                        {
-                                            cout << v7[i] << ",";
-                                            file_out << v7[i] << ',';
-                                        }
-                                        else if (x == 7)
-                                        {
-                                            cout << v8[i] << ",";
-                                            file_out << v8[i] << ',';
-                                        }
-                                        else if (x == 8)
-                                        {
-                                            cout << v9[i] << ",";
-                                            file_out << v9[i] << ',';
-                                        }
-                                        else if (x == 9)
-                                        {
-                                            cout << v10[i] << ",";
-                                            file_out << v10[i] << ',';
-                                        }
-                                    }
-                                    cout << endl;
-                                    file_out << endl;
-                                }
-                            }
+                            cout << v1[i] << ",";
+                            file_out << v1[i] << ',';
+                        }
+                        else if (x == 1) // cout the second column
+                        {
+                            cout << v2[i] << ",";
+                            file_out << v2[i] << ',';
+                        }
+                        else if (x == 2)
+                        {
+                            cout << v3[i] << ",";
+                            file_out << v3[i] << ',';
+                        }
+                        else if (x == 3)
+                        {
+                            cout << v4[i] << ",";
+                            file_out << v4[i] << ',';
+                        }
+                        else if (x == 4)
+                        {
+                            cout << v5[i] << ",";
+                            file_out << v5[i] << ',';
+                        }
+                        else if (x == 5)
+                        {
+                            cout << v6[i] << ",";
+                            file_out << v6[i] << ',';
+                        }
+                        else if (x == 6)
+                        {
+                            cout << v7[i] << ",";
+                            file_out << v7[i] << ',';
+                        }
+                        else if (x == 7)
+                        {
+                            cout << v8[i] << ",";
+                            file_out << v8[i] << ',';
+                        }
+                        else if (x == 8)
+                        {
+                            cout << v9[i] << ",";
+                            file_out << v9[i] << ',';
+                        }
+                        else if (x == 9)
+                        {
+                            cout << v10[i] << ",";
+                            file_out << v10[i] << ',';
                         }
                     }
+                    cout << endl;
+                    file_out << endl;
+                }
+            }
+        }
+    }
 
-                }; // don't delete this line
+}; // don't delete this line
