@@ -31,8 +31,8 @@ int main()
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput1.mdb");
-    file_out.open("fileOutput1.txt", ios::out);
+    file_in.open("fileInput2.mdb");
+    file_out.open("fileOutput2.txt", ios::out);
     // open the input file
 
     if (!file_in.is_open())
@@ -45,8 +45,6 @@ int main()
     string id;
     string file_name; // initialize file name
     string table_name;
-
-    vector<vector<string>> records;
 
     while (getline(file_in, command, ';')) // loop through command to find keyword
     {
@@ -87,9 +85,27 @@ int main()
     {
         stringstream iss(command);
 
+        // Log the command to both terminal and file
+        cout << command << endl;
+        file_out << command << endl;
+
         if (command.find("SELECT") != string::npos)
         {
-            Variables.select(command);
+            // Handle SELECT COUNT(*) command
+            if (command.find(" * ") != string::npos)
+            {
+                Variables.select(command);
+            }
+            // Handle SELECT WHERE command
+            else if (command.find("WHERE") != string::npos)
+            {
+                // Variables.select_where(command, table_name);
+            }
+            // Handle regular SELECT command
+            else if (command.find("COUNT(*)") != string::npos)
+            {
+                Variables.select_count();
+            }
         }
     }
 
