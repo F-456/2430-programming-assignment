@@ -19,7 +19,7 @@ class variable
 {
 private:
     int size;
-    int record_number = 0;
+    int record_number, individual_record_number = 0;
     vector<string> v1; // 10 vector as column to store data
     vector<string> v2;
     vector<string> v3;
@@ -34,6 +34,7 @@ private:
 
 public:
     variable() : size(0) {}
+    vector<vector<string>> records;
     string elements;
     string remove_non_alpha(string s)
     {
@@ -218,7 +219,7 @@ public:
                     {
                         v10.push_back(record[9]);
                     }
-                    record_number++;
+                    individual_record_number++;
                 }
             }
         }
@@ -226,15 +227,15 @@ public:
 
     void select(string s)
     {
-        file_out.open("fileOutput1.txt", fstream::app); // writting in append mode to prevent overwritting file
+        file_out.open("fileOutput2.txt", fstream::app); // writting in append mode to prevent overwritting file
 
-        record_number = record_number / size; // deviding record number with size to get the precise number of
+        record_number = individual_record_number / size; // deviding record number with size to get the precise number of
         // how many record is inserted (important)
         string word;
         stringstream ss(s);
 
-        cout << "There are " << record_number << "record" << endl;
-        cout << "size are " << size << endl;
+        // cout << "There are " << record_number << "record" << endl;
+        // cout << "size are " << size << endl;
         while (ss >> word)
         {
             if (word.find('*') != string::npos)
@@ -307,6 +308,14 @@ public:
                 }
             }
         }
+    }
+
+    void select_count()
+    {
+        file_out.open("fileOutput2.txt", fstream::app);         // Open file in append mode to prevent overwriting
+        cout << "Total records: " << record_number << endl;     // Directly print record_number
+        file_out << "Total records: " << record_number << endl; // Write it to the output file
+        file_out.close();
     }
 
 }; // don't delete this line
