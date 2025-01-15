@@ -2,7 +2,6 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <algorithm>
 #include <sstream>
 #include <set>
 #include <algorithm>
@@ -10,11 +9,11 @@
 #include <set>
 #include <map>
 
+
 using namespace std;
 
 ifstream file_in;
 ofstream file_out;
-string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
 class variable
 {
@@ -107,7 +106,7 @@ public:
             if (keyword_checked == true)
             {
                 table_name = word;
-                cout << remove_non_alpha(table_name) << " is created" << endl; // output the table name after removing unecessary symbol
+                cout << remove_non_alpha(table_name) << endl; // output the table name after removing unecessary symbol
                 break;
             }
         }
