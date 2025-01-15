@@ -31,8 +31,8 @@ int main()
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput1.mdb");
-    file_out.open("fileOutput1.txt", ios::out);
+    file_in.open("fileInput2.mdb");
+    file_out.open("fileOutput2.txt", ios::out);
     // open the input file
 
     if (!file_in.is_open())

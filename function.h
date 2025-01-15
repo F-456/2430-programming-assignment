@@ -38,7 +38,7 @@ public:
     string remove_non_alpha(string s)
     {
 
-        int j;
+        int j = 0;
 
         for (int i = 0; i < s.size(); i++)
         {
@@ -233,7 +233,7 @@ public:
         string word;
         stringstream ss(s);
 
-        cout << "There are " << record_number << "record" << endl;
+        cout << "There are " << record_number << " record" << endl;
         cout << "size are " << size << endl;
         while (ss >> word)
         {
@@ -308,5 +308,51 @@ public:
             }
         }
     }
+    void update(string s)
+    {
+        string word;
+        string table_name;
+        string set_column;
+        string where_column;
+        string new_value1;
+        string new_value2;
+        stringstream ss(s);
+        bool is_set = false;
+        bool is_where = false;
 
+        while (ss >> word)
+        {
+            if (word == "UPDATE")//skip update
+            {
+            }
+
+            else if (word == "SET")//skip set
+            {
+                is_set = true; is_where = false;
+            }
+            else if (word == "WHERE")
+            {
+                is_where = true; is_set = false;
+            }
+            else if(is_set)
+            {
+                size_t pos = word.find("="); //size_t uses to find the symbol "="
+                set_column = word.substr(0,pos); //Extract the string before the "="
+                new_value1 = word.substr(pos + 1); //find the new update value after the symbol "="
+                new_value1.erase(remove(new_value1.begin(), new_value1.end(), '\''), new_value1.end()); //remove ' '
+            }
+            else if(is_where)
+            {
+                size_t pos = word.find("=");
+                where_column = word.substr(0,pos);
+                new_value2 = word.substr(pos + 1);
+            }
+            else
+                {
+                    table_name = word;
+                }
+            }
+        }
+
+    }
 }; // don't delete this line
