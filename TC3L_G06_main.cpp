@@ -6,7 +6,7 @@
 // Trimester: 2430
 // Member_1: 242UC244DD | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
 // Member_2: 242UC244PP | Nicholas Beh Zhi Yang | NICHOLAS.BEH.ZHI@student.mmu.edu.my | 011-65215166
-// Member_3: ID | NAME | EMAIL | PHONE
+// Member_3: 242UC244Q2 | Low Xuan Yu | LOW.XUAN.YU@student.mmu.edu.my | 011-61330439
 // Member_4: ID | NAME | EMAIL | PHONE
 // *********************************************************
 // Task Distribution
@@ -31,8 +31,8 @@ int main()
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput2.mdb");
-    file_out.open("fileOutput2.txt", ios::out);
+    file_in.open("fileInput3.mdb");
+    file_out.open("fileOutput3.txt", ios::out);
     // open the input file
 
     if (!file_in.is_open())
@@ -96,19 +96,35 @@ int main()
             {
                 Variables.select(command);
             }
-            // Handle SELECT WHERE command
-            else if (command.find("WHERE") != string::npos)
-            {
-                // Variables.select_where(command, table_name);
-            }
-            // Handle regular SELECT command
+
             else if (command.find("COUNT(*)") != string::npos)
             {
                 Variables.select_count();
+            }
+            else if (command.find("all") != string::npos)
+            {
+                if (command.find("WHERE") != string::npos)
+                {
+                    Variables.select_where(command);
+                }
             }
         }
     }
 
     file_in.close();
     return 0;
+
+    while (getline(file_in, command, ';')) // second get line
+    {
+        stringstream iss(command);
+        cout << command << endl ;
+        file_out << command << endl;
+
+        if (command.find("DELETE") != string::npos)
+        {
+            Variables.delete_where(command);
+        }
+    }
+    file_in.close();
+    return 0 ;
 }
