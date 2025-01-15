@@ -96,17 +96,12 @@ int main()
             {
                 Variables.select(command);
             }
-            // Handle SELECT WHERE command
-            // else if (command.find("WHERE") != string::npos)
-            // {
-            //     Variables.select_where(command);
-            // }
-            // Handle regular SELECT command
+
             else if (command.find("COUNT(*)") != string::npos)
             {
                 Variables.select_count();
             }
-            else if (command.find(" ^ ") != string::npos)
+            else if (command.find("all") != string::npos)
             {
                 if (command.find("WHERE") != string::npos)
                 {
