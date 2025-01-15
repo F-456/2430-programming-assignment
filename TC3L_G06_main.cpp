@@ -31,8 +31,8 @@ int main()
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput2.mdb");
-    file_out.open("fileOutput2.txt", ios::out);
+    file_in.open("fileInput3.mdb");
+    file_out.open("fileOutput3.txt", ios::out);
     // open the input file
 
     if (!file_in.is_open())
@@ -97,14 +97,21 @@ int main()
                 Variables.select(command);
             }
             // Handle SELECT WHERE command
-            else if (command.find("WHERE") != string::npos)
-            {
-                // Variables.select_where(command, table_name);
-            }
+            // else if (command.find("WHERE") != string::npos)
+            // {
+            //     Variables.select_where(command);
+            // }
             // Handle regular SELECT command
             else if (command.find("COUNT(*)") != string::npos)
             {
                 Variables.select_count();
+            }
+            else if (command.find(" ^ ") != string::npos)
+            {
+                if (command.find("WHERE") != string::npos)
+                {
+                    Variables.select_where(command);
+                }
             }
         }
     }
