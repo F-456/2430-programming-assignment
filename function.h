@@ -78,19 +78,23 @@ public:
                 file_name = word;
                 cout << file_name << endl;
                 file_in.open(file_name);
+                file_out.open(output_file, fstream::app); // writting in append mode to prevent overwritting file
+                file_out << "CREATE " << output_file << "; " << endl;
+                cout << "CREATE " << output_file << "; " << endl;
             }
         }
     }
 
-    void create_database()
+    void create_database(string command)
     {
-
-        cout << "creating databases" << endl;
+        cout << command << endl;
+        file_out << command << endl;
     }
 
     string create_table(string s)
     {
-
+        file_out << s << endl;
+        cout << s << endl;
         stringstream ss(s);
         bool keyword_checked = false;
         string word;
@@ -113,7 +117,7 @@ public:
             if (keyword_checked == true)
             {
                 table_name = word;
-                cout << remove_non_alpha(table_name) << endl; // output the table name after removing unecessary symbol
+                // cout << remove_non_alpha(table_name) << endl; // output the table name after removing unecessary symbol
                 break;
             }
         }
@@ -142,7 +146,8 @@ public:
 
     void insert_record(string s, string table_name)
     {
-
+        file_out << s << endl;
+        cout << s << endl;
         string word;
         stringstream ss(s);
         int sequence = 0;
@@ -236,8 +241,8 @@ public:
 
     void select(string s)
     {
-        file_out.open(output_file, fstream::app); // writting in append mode to prevent overwritting file
-
+        file_out << s << endl;
+        cout << s << endl;
         string word;
         stringstream ss(s);
 
@@ -317,15 +322,18 @@ public:
         }
     }
 
-    void select_count()
+    void select_count(string s)
     {
+        file_out << s << endl;
+        cout << s << endl;
         cout << "Total records: " << record_number << endl;     // Directly print record_number
         file_out << "Total records: " << record_number << endl; // Write it to the output file
     }
 
     void select_where(const string &command)
     {
-
+        file_out << command << endl;
+        cout << command << endl;
         string column_name, condition_value;
         int column_index = -1;
 
@@ -418,7 +426,6 @@ public:
                     {
                         cout << v1[i] << ",";
                         file_out << v1[i] << ',';
-                        file_out << "Hello" << ',';
                     }
                     else if (x == 1)
                     {
@@ -486,6 +493,9 @@ public:
 
     void delete_where(string command)
     {
+
+        file_out << command << endl;
+        cout << command << endl;
         stringstream ss(command);
         string column_name, condition_value, current_value;
         ;

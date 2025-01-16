@@ -76,5 +76,5 @@ SELECT COUNT(*) FROM student
 4,name4,city4,state4,country4,phone4,email4,
 5,name5,city5,state5,country5,phone5,email5,
 student_id,student_name,student_city,student_state,student_country,student_phone,student_email,
-Hello,5,Hello,name5,city5,state5,country5,phone5,email5,
+5,Hello,name5,city5,state5,country5,phone5,email5,
 Total records: 5

@@ -28,8 +28,8 @@ int main()
 {
     variable Variables;
     // edit these two code for different input and output
-    string const input_file = "fileInput3.mdb";
-    string const output_file = "fileOutput3.txt";
+    string const input_file = "fileInput2.mdb";
+    string const output_file = "fileOutput2.txt";
     ifstream file_in;
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
@@ -50,13 +50,20 @@ int main()
     string id;
     string file_name; // initialize file name
     string table_name;
+    int target_line = 2;
+    int current_line = 0;
 
     while (getline(file_in, command, ';')) // loop through command to find keyword
     {
+        current_line++;
         stringstream iss(command);
 
-        cout << command << endl;
-        file_out << command << endl;
+        if (current_line == target_line) // capture the database name using file line
+        {
+            Variables.create_database(command); // recording database name
+        }
+        // cout << command << endl;  // debug for reading command purpose
+        // file_out << command << endl;
 
         if (command.find("CREATE") != string::npos) // npo = no position no keyword is found in the string
                                                     // to make checking the keyword possible
@@ -78,7 +85,6 @@ int main()
         {
 
             Variables.insert_record(command, table_name); // passing command and table name to insert the data
-            file_out << Variables.elements << endl;
         }
     }
 
@@ -90,10 +96,6 @@ int main()
     {
         stringstream iss(command);
 
-        // Log the command to both terminal and file
-        cout << command << endl;
-        file_out << command << endl;
-
         if (command.find("SELECT") != string::npos)
         {
             if (command.find(" * ") != string::npos) // select all
@@ -103,7 +105,7 @@ int main()
 
             else if (command.find("COUNT(*)") != string::npos)
             {
-                Variables.select_count(); // select count
+                Variables.select_count(command); // select count
             }
             else if (command.find("all") != string::npos)
             {
