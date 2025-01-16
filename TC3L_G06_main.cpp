@@ -7,7 +7,7 @@
 // Member_1: 242UC244DD | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
 // Member_2: 242UC244PP | Nicholas Beh Zhi Yang | NICHOLAS.BEH.ZHI@student.mmu.edu.my | 011-65215166
 // Member_3: 242UC24551 | LOW ZHENG HAO | LOW.ZHENG.HAO@student.mmu.edu.my | 013-8888444
-// Member_4: ID | NAME | EMAIL | PHONE
+// Member_4: 242UC244Q2 | Low Xuan Yu | LOW.XUAN.YU@student.mmu.edu.my | 011-61330439
 // *********************************************************
 // Task Distribution
 // Member_1:
@@ -27,12 +27,16 @@ using namespace std;
 int main()
 {
     variable Variables;
+    // edit these two code for different input and output
+    string const input_file = "fileInput2.mdb";
+    string const output_file = "fileOutput2.txt";
     ifstream file_in;
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput2.mdb");
-    file_out.open("fileOutput2.txt", ios::out);
+    file_in.open(input_file);
+    file_out.open(output_file, ios::out);
+
     // open the input file
 
     if (!file_in.is_open())
@@ -41,6 +45,8 @@ int main()
         // return error if the file name is incorrect
         return 1;
     }
+
+    Variables.get_outputfile(output_file); // function to get output file name for the header file
     string command;
     string id;
     string file_name; // initialize file name
@@ -115,6 +121,17 @@ int main()
         }
     }
 
+    while (getline(file_in, command, ';')) // second get line
+    {
+        stringstream iss(command);
+        cout << command << endl;
+        file_out << command << endl;
+
+        if (command.find("DELETE") != string::npos)
+        {
+            Variables.delete_where(command);
+        }
+    }
     file_in.close();
     return 0;
 }
