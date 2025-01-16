@@ -6,13 +6,13 @@
 // Trimester: 2430
 // Member_1: 242UC244DD | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
 // Member_2: 242UC244PP | Nicholas Beh Zhi Yang | NICHOLAS.BEH.ZHI@student.mmu.edu.my | 011-65215166
-// Member_3: ID | NAME | EMAIL | PHONE
+// Member_3: 242UC24551 | LOW ZHENG HAO | LOW.ZHENG.HAO@student.mmu.edu.my | 013-8888444
 // Member_4: ID | NAME | EMAIL | PHONE
 // *********************************************************
 // Task Distribution
 // Member_1:
 // Member_2:
-// Member_3:
+// Member_3: Update
 // Member_4:
 // *********************************************************
 
@@ -31,8 +31,8 @@ int main()
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput3.mdb");
-    file_out.open("fileOutput3.txt", ios::out);
+    file_in.open("fileInput2.mdb");
+    file_out.open("fileOutput2.txt", ios::out);
     // open the input file
 
     if (!file_in.is_open())
@@ -108,6 +108,10 @@ int main()
                     Variables.select_where(command);
                 }
             }
+        }
+        if (command.find("UPDATE") != string::npos)
+        {
+            Variables.update(command);
         }
     }
 

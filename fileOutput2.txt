@@ -45,6 +45,15 @@ SELECT * FROM customer
 SELECT COUNT(*) FROM customer
 
 
+TABLE
+
+
+UPDATE customer SET customer_email='email333' WHERE customer_id=3
+
+SELECT * FROM customer
+
+
+SELECT COUNT(*) FROM customer
 CREATE fileOutput2.txt
 
 DATABASES
@@ -88,3 +97,12 @@ SELECT * FROM customer
 SELECT COUNT(*) FROM customer
 
 
+TABLE
+
+
+UPDATE customer SET customer_email='email333' WHERE customer_id=3
+
+SELECT * FROM customer
+
+
+SELECT COUNT(*) FROM customer
