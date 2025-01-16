@@ -490,6 +490,94 @@ public:
             file_out << "No matching records found for " << column_name << " = " << condition_value << endl;
         }
     }
+    void update(string s)
+    {
+
+        file_out << s << endl;
+        cout << s << endl;
+        string word;
+        string table_name;
+        string set_column;
+        string where_column;
+        string new_value1;
+        string new_value2;
+        stringstream ss(s);
+        bool is_set = false;
+        bool is_where = false;
+
+        while (ss >> word)
+        {
+            if (word == "UPDATE") // skip update
+            {
+            }
+
+            else if (word == "SET") // skip set
+            {
+                is_set = true;
+                is_where = false;
+                // cout << "Found set";
+            }
+            else if (word == "WHERE")
+            {
+                is_where = true;
+                is_set = false;
+                // cout <<"Found where";
+            }
+            else if (is_set)
+            {
+                size_t pos = word.find("=");                                                            // size_t uses to find the symbol "="
+                set_column = word.substr(0, pos);                                                       // Extract the string before the "="
+                new_value1 = word.substr(pos + 1);                                                      // find the new update value after the symbol "="
+                new_value1.erase(remove(new_value1.begin(), new_value1.end(), '\''), new_value1.end()); // remove ' '
+                // cout << new_value1 << endl;
+            }
+            else if (is_where)
+            {
+                size_t pos = word.find("=");
+                where_column = word.substr(0, pos);
+                new_value2 = word.substr(pos + 1);
+                if (size_t pos = word.find(" ' "))
+                {
+                    new_value2.erase(remove(new_value2.begin(), new_value2.end(), '\''), new_value2.end()); // check if value key in got ' '
+                }
+                else
+                {
+                }
+
+                // cout << new_value2 << endl;
+            }
+            else
+            {
+                table_name = word;
+            }
+        }
+
+        for (int i = 0; i < record_number; i++)
+        {
+            if (where_column == header_key[0] && v1[i] == new_value2)
+            {
+                if (set_column == header_key[1])
+                    v2[i] = new_value1;
+                else if (set_column == header_key[2])
+                    v3[i] = new_value1;
+                else if (set_column == header_key[3])
+                    v4[i] = new_value1;
+                else if (set_column == header_key[4])
+                    v5[i] = new_value1;
+                else if (set_column == header_key[5])
+                    v6[i] = new_value1;
+                else if (set_column == header_key[6])
+                    v7[i] = new_value1;
+                else if (set_column == header_key[7])
+                    v8[i] = new_value1;
+                else if (set_column == header_key[8])
+                    v9[i] = new_value1;
+                else if (set_column == header_key[9])
+                    v10[i] = new_value1;
+            }
+        }
+        // cout << "Update complete" << endl;
+    }
 
     void delete_where(string command)
     {

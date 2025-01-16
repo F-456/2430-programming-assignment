@@ -7,7 +7,7 @@
 // Member_1: 242UC244DD | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
 // Member_2: 242UC244PP | Nicholas Beh Zhi Yang | NICHOLAS.BEH.ZHI@student.mmu.edu.my | 011-65215166
 // Member_3: 242UC244Q2 | Low Xuan Yu | LOW.XUAN.YU@student.mmu.edu.my | 011-61330439
-// Member_4: ID | NAME | EMAIL | PHONE
+// Member_4: Member_3: 242UC24551 | LOW ZHENG HAO | LOW.ZHENG.HAO@student.mmu.edu.my | 013-8888444
 // *********************************************************
 // Task Distribution
 // Member_1:
@@ -114,6 +114,10 @@ int main()
                     Variables.select_where(command);
                 }
             }
+        }
+        if (command.find("UPDATE") != string::npos)
+        {
+            Variables.update(command);
         }
         if (command.find("DELETE") != string::npos) // deleting
         {
