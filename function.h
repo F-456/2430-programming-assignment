@@ -9,7 +9,6 @@
 #include <set>
 #include <map>
 
-
 using namespace std;
 
 ifstream file_in;
@@ -34,6 +33,7 @@ private:
 
 public:
     variable() : size(0) {}
+    string output_file;
     vector<vector<string>> records;
     string elements;
     string remove_non_alpha(string s)
@@ -53,6 +53,10 @@ public:
         }
         //  return the non special character string by using the locater j
         return s.substr(0, j);
+    }
+    void get_outputfile(string file_name)
+    {
+        output_file = file_name;
     }
 
     void open_file(string s)
@@ -227,7 +231,7 @@ public:
 
     void select(string s)
     {
-        file_out.open("fileOutput3.txt", fstream::app); // writting in append mode to prevent overwritting file
+        file_out.open(output_file, fstream::app); // writting in append mode to prevent overwritting file
 
         record_number = individual_record_number / size; // deviding record number with size to get the precise number of
         // how many record is inserted (important)
@@ -312,7 +316,8 @@ public:
 
     void select_count()
     {
-        file_out.open("fileOutput3.txt", fstream::app);         // Open file in append mode to prevent overwriting
+
+        file_out.open(output_file, fstream::app);               // Open file in append mode to prevent overwriting
         cout << "Total records: " << record_number << endl;     // Directly print record_number
         file_out << "Total records: " << record_number << endl; // Write it to the output file
         file_out.close();
@@ -320,7 +325,7 @@ public:
 
     void select_where(const string &command)
     {
-        file_out.open("fileOutput3.txt", fstream::app); // Open file in append mode
+        file_out.open(output_file, fstream::app); // Open file in append mode
 
         string column_name, condition_value;
         int column_index = -1;
@@ -449,12 +454,11 @@ public:
 
     void delete_where(const std::string &command)
     {
-        file_out.open("fileOutput3.txt", std::fstream::app); 
+        file_out.open(output_file, std::fstream::app);
 
         std::string column_name, condition_value;
         int column_index = -1;
 
-   
         size_t where_pos = command.find("WHERE");
         if (where_pos != std::string::npos)
         {
@@ -463,14 +467,12 @@ public:
             {
 
                 column_name = command.substr(where_pos + 6, equals_pos - where_pos - 6);
-                column_name.erase(column_name.find_last_not_of(" ") + 1); 
-
+                column_name.erase(column_name.find_last_not_of(" ") + 1);
 
                 condition_value = command.substr(equals_pos + 1);
-                condition_value.erase(0, condition_value.find_first_not_of(" ")); 
-                condition_value.erase(condition_value.find_last_not_of(" ") + 1); 
+                condition_value.erase(0, condition_value.find_first_not_of(" "));
+                condition_value.erase(condition_value.find_last_not_of(" ") + 1);
 
-            
                 if (condition_value.front() == '\'' && condition_value.back() == '\'')
                 {
                     condition_value = condition_value.substr(1, condition_value.size() - 2);
@@ -493,7 +495,6 @@ public:
             return;
         }
 
-
         for (const auto &header : header_key)
         {
             std::cout << header << ',';
@@ -504,12 +505,11 @@ public:
 
         std::vector<std::vector<std::string>> remaining_rows; // Store rows that do not match the condition
 
-        // delete the select row 
+        // delete the select row
         for (size_t i = 0; i < record_number; i++)
         {
             std::vector<std::string> row = {v1[i], v2[i], v3[i], v4[i], v5[i], v6[i], v7[i], v8[i], v9[i], v10[i]};
 
-    
             if (row[column_index] == condition_value)
             {
                 continue;
@@ -517,7 +517,6 @@ public:
 
             remaining_rows.push_back(row);
         }
-
 
         for (const auto &row : remaining_rows)
         {
@@ -531,7 +530,7 @@ public:
         }
 
         // update new table
-        record_number = remaining_rows.size(); 
+        record_number = remaining_rows.size();
         for (size_t i = 0; i < remaining_rows.size(); i++)
         {
             v1[i] = remaining_rows[i][0];
@@ -546,8 +545,7 @@ public:
             v10[i] = remaining_rows[i][9];
         }
 
-
-        cout << endl ;
+        cout << endl;
         file_out.close();
     }
-};// don't delete this line
+}; // don't delete this line

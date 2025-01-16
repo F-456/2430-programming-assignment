@@ -27,12 +27,15 @@ using namespace std;
 int main()
 {
     variable Variables;
+    // edit these two code for different input and output
+    string const input_file = "fileInput2.mdb";
+    string const output_file = "fileOutput2.txt";
     ifstream file_in;
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
-    file_in.open("fileInput3.mdb");
-    file_out.open("fileOutput3.txt", ios::out);
+    file_in.open(input_file);
+    file_out.open(output_file, ios::out);
     // open the input file
 
     if (!file_in.is_open())
@@ -41,6 +44,8 @@ int main()
         // return error if the file name is incorrect
         return 1;
     }
+
+    Variables.get_outputfile(output_file); // function to get output file name for the header file
     string command;
     string id;
     string file_name; // initialize file name
@@ -111,13 +116,10 @@ int main()
         }
     }
 
-    file_in.close();
-    return 0;
-
     while (getline(file_in, command, ';')) // second get line
     {
         stringstream iss(command);
-        cout << command << endl ;
+        cout << command << endl;
         file_out << command << endl;
 
         if (command.find("DELETE") != string::npos)
@@ -126,5 +128,5 @@ int main()
         }
     }
     file_in.close();
-    return 0 ;
+    return 0;
 }
