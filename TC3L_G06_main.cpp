@@ -96,15 +96,14 @@ int main()
 
         if (command.find("SELECT") != string::npos)
         {
-            // Handle SELECT COUNT(*) command
-            if (command.find(" * ") != string::npos)
+            if (command.find(" * ") != string::npos) // select all
             {
                 Variables.select(command);
             }
 
             else if (command.find("COUNT(*)") != string::npos)
             {
-                Variables.select_count();
+                Variables.select_count(); // select count
             }
             else if (command.find("all") != string::npos)
             {
@@ -114,19 +113,12 @@ int main()
                 }
             }
         }
-    }
-
-    while (getline(file_in, command, ';')) // second get line
-    {
-        stringstream iss(command);
-        cout << command << endl;
-        file_out << command << endl;
-
-        if (command.find("DELETE") != string::npos)
+        if (command.find("DELETE") != string::npos) // deleting
         {
             Variables.delete_where(command);
         }
     }
+
     file_in.close();
     return 0;
 }

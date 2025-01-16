@@ -88,3 +88,5 @@ SELECT * FROM customer
 SELECT COUNT(*) FROM customer
 
 
+ry3,phone3,email3,
+4,name4,city4,state4,country4,phone4,email4,
