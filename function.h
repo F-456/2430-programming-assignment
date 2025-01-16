@@ -319,16 +319,12 @@ public:
 
     void select_count()
     {
-
-        file_out.open(output_file, fstream::app);               // Open file in append mode to prevent overwriting
         cout << "Total records: " << record_number << endl;     // Directly print record_number
         file_out << "Total records: " << record_number << endl; // Write it to the output file
-        file_out.close();
     }
 
     void select_where(const string &command)
     {
-        file_out.open(output_file, fstream::app); // Open file in append mode
 
         string column_name, condition_value;
         int column_index = -1;
@@ -413,34 +409,69 @@ public:
             else if (column_index == 9)
                 current_value = v10[i];
 
-            // Debug output
-            // cout << "Comparing: current_value = '" << current_value << "' with condition_value = '" << condition_value << "'" << endl;
-
             if (current_value == condition_value) // Check the condition
             {
                 match_found = true; // A match was found
                 for (int x = 0; x < size; x++)
                 {
                     if (x == 0)
-                        cout << v1[i] << ",", file_out << v1[i] << ',';
+                    {
+                        cout << v1[i] << ",";
+                        file_out << v1[i] << ',';
+                        file_out << "Hello" << ',';
+                    }
                     else if (x == 1)
-                        cout << v2[i] << ",", file_out << v2[i] << ',';
+                    {
+                        cout << v2[i] << ",";
+                        file_out << v2[i] << ',';
+                    }
                     else if (x == 2)
-                        cout << v3[i] << ",", file_out << v3[i] << ',';
+                    {
+                        cout << v3[i] << ",";
+                        file_out << v3[i] << ',';
+                    }
+
                     else if (x == 3)
-                        cout << v4[i] << ",", file_out << v4[i] << ',';
+                    {
+                        cout << v4[i] << ",";
+                        file_out << v4[i] << ',';
+                    }
+
                     else if (x == 4)
-                        cout << v5[i] << ",", file_out << v5[i] << ',';
+                    {
+                        cout << v5[i] << ",";
+                        file_out << v5[i] << ',';
+                    }
+
                     else if (x == 5)
-                        cout << v6[i] << ",", file_out << v6[i] << ',';
+                    {
+                        cout << v6[i] << ",";
+                        file_out << v6[i] << ',';
+                    }
+
                     else if (x == 6)
-                        cout << v7[i] << ",", file_out << v7[i] << ',';
+                    {
+                        cout << v7[i] << ",";
+                        file_out << v7[i] << ',';
+                    }
+
                     else if (x == 7)
-                        cout << v8[i] << ",", file_out << v8[i] << ',';
+                    {
+                        cout << v8[i] << ",";
+                        file_out << v8[i] << ',';
+                    }
+
                     else if (x == 8)
-                        cout << v9[i] << ",", file_out << v9[i] << ',';
+                    {
+                        cout << v9[i] << ",";
+                        file_out << v9[i] << ',';
+                    }
+
                     else if (x == 9)
-                        cout << v10[i] << ",", file_out << v10[i] << ',';
+                    {
+                        cout << v10[i] << ",";
+                        file_out << v10[i] << ',';
+                    }
                 }
                 cout << endl;
                 file_out << endl;
@@ -451,8 +482,6 @@ public:
             cout << "No matching records found for " << column_name << " = " << condition_value << endl;
             file_out << "No matching records found for " << column_name << " = " << condition_value << endl;
         }
-
-        file_out.close();
     }
 
     void delete_where(const std::string &command)
