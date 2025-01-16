@@ -418,7 +418,6 @@ public:
                     {
                         cout << v1[i] << ",";
                         file_out << v1[i] << ',';
-                        file_out << "Hello" << ',';
                     }
                     else if (x == 1)
                     {
@@ -430,43 +429,36 @@ public:
                         cout << v3[i] << ",";
                         file_out << v3[i] << ',';
                     }
-
                     else if (x == 3)
                     {
                         cout << v4[i] << ",";
                         file_out << v4[i] << ',';
                     }
-
                     else if (x == 4)
                     {
                         cout << v5[i] << ",";
                         file_out << v5[i] << ',';
                     }
-
                     else if (x == 5)
                     {
                         cout << v6[i] << ",";
                         file_out << v6[i] << ',';
                     }
-
                     else if (x == 6)
                     {
                         cout << v7[i] << ",";
                         file_out << v7[i] << ',';
                     }
-
                     else if (x == 7)
                     {
                         cout << v8[i] << ",";
                         file_out << v8[i] << ',';
                     }
-
                     else if (x == 8)
                     {
                         cout << v9[i] << ",";
                         file_out << v9[i] << ',';
                     }
-
                     else if (x == 9)
                     {
                         cout << v10[i] << ",";
