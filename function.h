@@ -496,7 +496,14 @@ public:
                 size_t pos = word.find("=");
                 where_column = word.substr(0,pos);
                 new_value2 = word.substr(pos + 1);
-                //new_value2.erase(remove(new_value2.begin(), new_value2.end(), '\''), new_value1.end());
+                if(size_t pos = word.find(" ' "))
+                {
+                    new_value2.erase(remove(new_value2.begin(), new_value2.end(), '\''), new_value2.end()); //check if value key in got ' '
+                }
+                else
+                {
+                }
+
                 //cout << new_value2 << endl;
             }
             else
@@ -520,8 +527,7 @@ public:
                 else if (set_column == header_key[9]) v10[i] = new_value1;
             }
         }
-
-        cout << "Update complete" << endl;
+        //cout << "Update complete" << endl;
     }
 
     void delete_where(const std::string &command)
