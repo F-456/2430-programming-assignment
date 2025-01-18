@@ -266,54 +266,59 @@ public:
                     {
                         if (x == 0) // cout the first column
                         {
-                            cout << v1[i] << ",";
-                            file_out << v1[i] << ',';
+                            cout << v1[i];
+                            file_out << v1[i];
                         }
                         else if (x == 1) // cout the second column
                         {
-                            cout << v2[i] << ",";
-                            file_out << v2[i] << ',';
+                            cout << v2[i];
+                            file_out << v2[i];
                         }
                         else if (x == 2)
                         {
-                            cout << v3[i] << ",";
-                            file_out << v3[i] << ',';
+                            cout << v3[i];
+                            file_out << v3[i];
                         }
                         else if (x == 3)
                         {
-                            cout << v4[i] << ",";
-                            file_out << v4[i] << ',';
+                            cout << v4[i];
+                            file_out << v4[i];
                         }
                         else if (x == 4)
                         {
-                            cout << v5[i] << ",";
-                            file_out << v5[i] << ',';
+                            cout << v5[i];
+                            file_out << v5[i];
                         }
                         else if (x == 5)
                         {
-                            cout << v6[i] << ",";
-                            file_out << v6[i] << ',';
+                            cout << v6[i];
+                            file_out << v6[i];
                         }
                         else if (x == 6)
                         {
-                            cout << v7[i] << ",";
-                            file_out << v7[i] << ',';
+                            cout << v7[i];
+                            file_out << v7[i];
                         }
                         else if (x == 7)
                         {
-                            cout << v8[i] << ",";
-                            file_out << v8[i] << ',';
+                            cout << v8[i];
+                            file_out << v8[i];
                         }
                         else if (x == 8)
                         {
-                            cout << v9[i] << ",";
-                            file_out << v9[i] << ',';
+                            cout << v9[i];
+                            file_out << v9[i];
                         }
                         else if (x == 9)
                         {
-                            cout << v10[i] << ",";
-                            file_out << v10[i] << ',';
+                            cout << v10[i];
+                            file_out << v10[i];
                         }
+                        if (x != size - 1)
+                        {
+                            cout << ",";
+                            file_out << ",";
+                        } // delete the last comma to make it tidy
                     }
                     cout << endl;
                     file_out << endl;
@@ -588,7 +593,7 @@ public:
         string column_name, condition_value, current_value;
         ;
         int column_index = -1;
-        int target = 0;
+        int target = -1;
 
         // Parse the command to extract the column name and condition value
         size_t where_pos = command.find("WHERE");
@@ -633,6 +638,8 @@ public:
 
         for (int i = 0; i < record_number; i++)
         {
+            // cout << current_value << endl;
+            // cout << condition_value << endl;
             // Get the value from the appropriate column
             if (column_index == 0)
             {
@@ -675,54 +682,69 @@ public:
                 current_value = v10[i];
             }
 
-            if (current_value == condition_value) // Check the condition
-                target = stoi(current_value);
+            if (current_value == condition_value)
+            {
+                // Check the condition
+                // cout << "checked" << endl;
+                target = i;
+            }
         }
-        target -= 1;
 
-        for (int x = 0; x < size; x++) // deleting vector using detected column key
+        if (target != -1)
         {
-            if (x == 0)
+            record_number -= 1;
+            for (int x = 0; x < size; x++) // deleting vector using detected column key
             {
-                v1.erase(v1.begin() + target);
+                if (x == 0)
+                {
+                    v1.erase(v1.begin() + target);
+                }
+                else if (x == 1)
+                {
+                    v2.erase(v2.begin() + target);
+                }
+                else if (x == 2)
+                {
+                    v3.erase(v3.begin() + target);
+                }
+                else if (x == 3)
+                {
+                    v4.erase(v4.begin() + target);
+                }
+                else if (x == 4)
+                {
+                    v5.erase(v5.begin() + target);
+                }
+                else if (x == 5)
+                {
+                    v6.erase(v6.begin() + target);
+                }
+                else if (x == 6)
+                {
+                    v7.erase(v7.begin() + target);
+                }
+                else if (x == 7)
+                {
+                    v8.erase(v8.begin() + target);
+                }
+                else if (x == 8)
+                {
+                    v9.erase(v9.begin() + target);
+                }
+                else if (x == 9)
+                {
+                    v10.erase(v10.begin() + target);
+                }
             }
-            else if (x == 1)
-            {
-                v2.erase(v2.begin() + target);
-            }
-            else if (x == 2)
-            {
-                v3.erase(v3.begin() + target);
-            }
-            else if (x == 3)
-            {
-                v4.erase(v4.begin() + target);
-            }
-            else if (x == 4)
-            {
-                v5.erase(v5.begin() + target);
-            }
-            else if (x == 5)
-            {
-                v6.erase(v6.begin() + target);
-            }
-            else if (x == 6)
-            {
-                v7.erase(v7.begin() + target);
-            }
-            else if (x == 7)
-            {
-                v8.erase(v8.begin() + target);
-            }
-            else if (x == 8)
-            {
-                v9.erase(v9.begin() + target);
-            }
-            else if (x == 9)
-            {
-                v10.erase(v10.begin() + target);
-            }
+            target = -1; // reset the target value
         }
-        record_number -= 1;
+        else
+
+            cout << " Error when deleting record , recheck the detail" << endl; // output error when no value matched
+    }
+
+    void close_file()
+    {
+        file_out.close();
     }
 }; // don't delete this line

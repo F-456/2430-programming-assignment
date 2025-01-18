@@ -10,7 +10,7 @@
 // Member_4: Member_3: 242UC24551 | LOW ZHENG HAO | LOW.ZHENG.HAO@student.mmu.edu.my | 013-8888444
 // *********************************************************
 // Task Distribution
-// Member_1:
+// Member_1:TIEW FU SIANG| Read and write file, main file code detection, create table structure, insert into, select all
 // Member_2:
 // Member_3:
 // Member_4:
@@ -28,14 +28,14 @@ int main()
 {
     variable Variables;
     // edit these two code for different input and output
-    string const input_file = "fileInput3.mdb";
-    string const output_file = "fileOutput3.txt";
+    string const input_file = "fileInput2.mdb";
+    string const output_file = "fileOutput2.txt";
     ifstream file_in;
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
 
     file_in.open(input_file);
-    file_out.open(output_file, ios::out);
+    // file_out.open(output_file, ios::out);
     // open the input file
 
     if (!file_in.is_open())
@@ -125,6 +125,7 @@ int main()
         }
     }
 
+    Variables.close_file();
     file_in.close();
     return 0;
 }
