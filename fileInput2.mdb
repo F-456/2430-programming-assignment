@@ -19,7 +19,7 @@ SELECT * FROM customer;
 
 TABLES;
 
-UPDATE customer SET customer_email='email333' WHERE customer_id=3;  
+UPDATE customer SET customer_name='Nicholas' WHERE customer_id=3;  
 SELECT * FROM customer;
 
 DELETE FROM customer WHERE customer_id=4;
