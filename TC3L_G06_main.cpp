@@ -7,13 +7,13 @@
 // Member_1: 242UC244DD | TIEW FU SIANG | TIEW.FU.SIANG@student.mmu.edu.my |010-3706933
 // Member_2: 242UC244PP | Nicholas Beh Zhi Yang | NICHOLAS.BEH.ZHI@student.mmu.edu.my | 011-65215166
 // Member_3: 242UC244Q2 | Low Xuan Yu | LOW.XUAN.YU@student.mmu.edu.my | 011-61330439
-// Member_4: Member_3: 242UC24551 | LOW ZHENG HAO | LOW.ZHENG.HAO@student.mmu.edu.my | 013-8888444
+// Member_4: 242UC24551 | LOW ZHENG HAO | LOW.ZHENG.HAO@student.mmu.edu.my | 013-8888444
 // *********************************************************
 // Task Distribution
 // Member_1:TIEW FU SIANG| Read and write file, main file code detection, create table structure, insert into, select all
 // Member_2: select count, select_where
 // Member_3:
-// Member_4:
+// Member_4:LOW ZHEHG HAO| Update
 // *********************************************************
 
 #include <iostream>
