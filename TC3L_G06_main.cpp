@@ -28,8 +28,8 @@ int main()
 {
     variable Variables;
     // edit these two code for different input and output
-    string const input_file = "fileInput3.mdb";
-    string const output_file = "fileOutput3.txt";
+    string const input_file = "fileInput2.mdb";
+    string const output_file = "fileOutput2.txt";
     ifstream file_in;
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
