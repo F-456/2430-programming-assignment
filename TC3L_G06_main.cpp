@@ -13,7 +13,7 @@
 // Member_1:TIEW FU SIANG| Read and write file, main file code detection, create table structure, insert into, select all
 // Member_2: select count, select_where
 // Member_3:LOW ZHEHG HAO| Update
-// Member_4:
+// Member_4: Delete from table row
 // *********************************************************
 
 #include <iostream>
@@ -28,8 +28,7 @@ int main()
 {
     variable Variables;
     // edit these two code for different input and output
-    string const input_file = "fileInput2.mdb";
-    string const output_file = "fileOutput2.txt";
+    string const input_file = "fileInput1.mdb";
     ifstream file_in;
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;
@@ -45,7 +44,6 @@ int main()
         return 1;
     }
 
-    Variables.get_outputfile(output_file); // function to get output file name for the header file
     string command;
     string id;
     string file_name; // initialize file name

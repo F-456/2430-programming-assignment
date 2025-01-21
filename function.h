@@ -57,10 +57,6 @@ public:
         //  return the non special character string by using the locater j
         return s.substr(0, j);
     }
-    void get_outputfile(string file_name)
-    {
-        output_file = file_name;
-    }
 
     void open_file(string s)
     {
@@ -75,8 +71,7 @@ public:
             }
             else
             {
-                file_name = word;
-                cout << file_name << endl;
+                output_file = word; // using the detected file name as output file name
                 file_in.open(file_name);
                 file_out.open(output_file, fstream::app); // writting in append mode to prevent overwritting file
                 file_out << "CREATE " << output_file << "; " << endl;
