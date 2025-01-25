@@ -27,8 +27,10 @@ using namespace std;
 int main()
 {
     variable Variables;
-    // edit these two code for different input and output
+    // input file options
     string const input_file = "fileInput1.mdb";
+    // string const input_file = "fileInput2.mdb";
+    // string const input_file = "fileInput3.mdb";
     ifstream file_in;
     ofstream file_out;
     string o1, o2, o3, o4, o5, o6, o7, o8, o9, o10;

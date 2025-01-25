@@ -37,7 +37,6 @@ private:
 public:
     variable() : size(0) {}
     string output_file;
-    vector<vector<string>> records;
     string elements;
     string remove_non_alpha(string s)
     {
@@ -95,13 +94,16 @@ public:
         string word;
         string table_name;
 
-        while (ss >> word) // loop through every word of the command itself
+        while (ss >> word)
+        // loop through every word of the command itself
         {
 
-            if (word.find('CREATE') != string::npos) // ignore and passes create
+            if (word.find('CREATE') != string::npos)
+            // ignore and skip create
             {
             }
-            else if (word.find('TABLE') != string::npos) // ignore and  passes table
+            else if (word.find('TABLE') != string::npos)
+            // ignore and skip table
             {
             }
             else
@@ -230,7 +232,8 @@ public:
                 }
             }
         }
-        record_number = individual_record_number / size; // deviding record number with size to get the precise number of
+        record_number = individual_record_number / size;
+        // deviding record number with size to get the precise number of
         // how many record is inserted (important)
     }
 
@@ -685,10 +688,11 @@ public:
             }
         }
 
-        if (target != -1)
+        if (target != -1) // target is found
         {
             record_number -= 1;
-            for (int x = 0; x < size; x++) // deleting vector using detected column key
+            for (int x = 0; x < size; x++)
+            // deleting vector using detected column key
             {
                 if (x == 0)
                 {
